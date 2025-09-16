@@ -39,6 +39,8 @@ dependencies:
   provider: ^6.1.5+1
   flutter_svg: ^2.2.0
   firebase_core:
+  url_launcher_web: ^2.4.1
+  url_launcher:
 
 dev_dependencies:
   flutter_test:

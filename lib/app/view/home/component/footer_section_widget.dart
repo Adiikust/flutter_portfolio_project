@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/constants/images_resource.dart';
 
@@ -44,19 +45,25 @@ class FooterSectionWidget extends StatelessWidget {
               _buildSocialIcon(
                 svgPath: ImagesResource.githubSvg,
                 tooltip: "GitHub",
-                onTap: () {},
+                onTap: () {
+                  _launchUrl("https://github.com/Adiikust");
+                },
               ),
               const SizedBox(width: 8),
               _buildSocialIcon(
                 svgPath: ImagesResource.linkedinSvg,
                 tooltip: "LinkedIn",
-                onTap: () {},
+                onTap: () {
+                  _launchUrl("https://linkedin.com/in/muhammad-adnan-hameed");
+                },
               ),
               const SizedBox(width: 8),
               _buildSocialIcon(
                 svgPath: ImagesResource.twitterSvg,
                 tooltip: "Twitter",
-                onTap: () {},
+                onTap: () {
+                  _launchUrl("https://twitter.com/muhammad-adnan-hameed");
+                },
               ),
             ],
           ),
@@ -77,6 +84,16 @@ class FooterSectionWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> _launchUrl(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (!await launchUrl(
+      uri,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
+    }
   }
   Widget _buildSocialIcon({
     required String svgPath,

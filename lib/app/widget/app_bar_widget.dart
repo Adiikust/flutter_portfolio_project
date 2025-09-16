@@ -1,3 +1,5 @@
+import 'package:url_launcher/url_launcher.dart';
+
 import '../../core/constants/export.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
@@ -11,6 +13,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
     final double sizeWidth = MediaQuery.of(context).size.width;
     double horizontalWidth = isDesktop ? 80 : 0;
 
+
     return AppBar(
       backgroundColor: AppColors.whiteColor,
       elevation: 1,
@@ -18,7 +21,6 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         padding: EdgeInsets.symmetric(horizontal: horizontalWidth),
         child: Row(
           children: [
-            /// Logo / Name
             TextViewWidget(
               "Muhammad Adnan Hameed",
               fontSize: (sizeWidth * 0.024).clamp(15, 28),
@@ -26,10 +28,8 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
               color: AppColors.blackColor,
             ),
 
-            /// Spacer for desktop menu
             if (isDesktop) const Spacer(),
 
-            /// ✅ Desktop Navigation Menu
             if (isDesktop)
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -43,23 +43,28 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
 
             const Spacer(),
 
-            /// ✅ Social Icons
             Row(
               children: [
                 _buildSocialIcon(
                   svgPath: ImagesResource.githubSvg,
                   tooltip: "GitHub",
-                  onTap: () {},
+                  onTap: () {
+                    _launchUrl("https://github.com/Adiikust");
+                  },
                 ),
                 _buildSocialIcon(
                   svgPath: ImagesResource.linkedinSvg,
                   tooltip: "LinkedIn",
-                  onTap: () {},
+                  onTap: () {
+                    _launchUrl("https://linkedin.com/in/muhammad-adnan-hameed");
+                  },
                 ),
                 _buildSocialIcon(
                   svgPath: ImagesResource.twitterSvg,
                   tooltip: "Twitter",
-                  onTap: () {},
+                  onTap: () {
+                    _launchUrl("https://twitter.com/muhammad-adnan-hameed");
+                  },
                 ),
               ],
             ),
@@ -68,6 +73,17 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       ),
     );
   }
+
+  Future<void> _launchUrl(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (!await launchUrl(
+      uri,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
 
   /// Navigation Button
   Widget _buildNavButton(String label, VoidCallback onPressed) {

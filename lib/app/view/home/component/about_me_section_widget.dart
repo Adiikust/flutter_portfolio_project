@@ -8,13 +8,10 @@ class AboutMeSectionWidget extends StatelessWidget {
     final bool isDesktop = Responsive.isDesktop(context);
     final bool isMobile = Responsive.isMobile(context);
     final bool isTablet = Responsive.isTablet(context);
-    double sizeWidth = MediaQuery.of(context).size.width;
-    double horizontalWidth = isDesktop ? 80 : 0;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        /// LEFT SIDE - About Me
         Flexible(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,31 +24,35 @@ class AboutMeSectionWidget extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               const TextViewWidget(
-                "Senior Flutter Developer with 5+ years of experience building high-performance mobile applications. "
-                "Passionate about creating seamless user experiences and scalable solutions for both Android and iOS platforms.",
-                fontSize: 20,
-                align: TextAlign.justify,
-                fontWeight: FontWeight.normal,
-                color: AppColors.secondaryColor,
-              ),
-              const SizedBox(height: 15),
-              const TextViewWidget(
-                "I've successfully delivered 20+ apps to production, specializing in complex integrations, "
-                "state management, and performance optimization.",
+                "👋 Hi, I’m Muhammad Adnan Hameed – a Senior Flutter Developer & Team Lead with over 4 years of professional experience in building high-quality, cross-platform mobile applications."
+                "\n\nI specialize in turning ideas into impactful apps that combine seamless performance, modern UI/UX, and scalable architecture. From Figma designs to fully deployed apps on the Play Store and App Store, I handle the complete development lifecycle."
+                "\n\n💼 My toolkit includes Dart and Flutter for cross-platform development; Riverpod, GetX, Provider, and BLoC for state management; Firebase, Firestore, REST APIs, and WebSockets for backend and API integration; as well as In-App Purchases, Ads, Payment Gateways, and Push Notifications for app monetization and engagement. I also apply Clean Architecture, MVVM, and Repository Pattern for scalable design, and rely on tools like GitHub, CI/CD pipelines, Figma, and Postman to ensure smooth collaboration and delivery.",
                 fontSize: 20,
                 align: TextAlign.justify,
                 fontWeight: FontWeight.normal,
                 color: AppColors.secondaryColor,
               ),
               if (isMobile) const SizedBox(height: 30),
-              if (isMobile)techSkill( isTablet: isTablet, isDesktop: isDesktop, isMobile: isMobile),
+              if (isMobile)
+                techSkill(
+                  isTablet: isTablet,
+                  isDesktop: isDesktop,
+                  isMobile: isMobile,
+                ),
             ],
           ),
         ),
 
         if (isTablet || isDesktop) const SizedBox(width: 64),
 
-        if (isTablet || isDesktop) Flexible(child: techSkill( isTablet: isTablet, isDesktop: isDesktop, isMobile: isMobile)),
+        if (isTablet || isDesktop)
+          Flexible(
+            child: techSkill(
+              isTablet: isTablet,
+              isDesktop: isDesktop,
+              isMobile: isMobile,
+            ),
+          ),
       ],
     );
   }
@@ -71,8 +72,6 @@ class AboutMeSectionWidget extends StatelessWidget {
           color: AppColors.blackColor,
         ),
         const SizedBox(height: 20),
-
-        /// Grid of skills
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -86,11 +85,11 @@ class AboutMeSectionWidget extends StatelessWidget {
                 ? 1.9
                 : 1.7,
           ),
-          itemCount: 9,
+          itemCount: skills.length,
           itemBuilder: (context, index) {
             return SkillCard(
-              iconPath: ImagesResource.linkedinSvg,
-              title: "Flutter",
+              iconPath: skills[index]["icon"],
+              title: skills[index]["title"],
             );
           },
         ),
@@ -99,9 +98,26 @@ class AboutMeSectionWidget extends StatelessWidget {
   }
 }
 
-/// Single Skill Card
+List skills = [
+  {"icon": Icons.flutter_dash, "title": "Flutter"},
+  {"icon": Icons.code, "title": "Dart"},
+  {"icon": Icons.fireplace, "title": "Firebase"},
+  {"icon": Icons.api, "title": "REST APIs"},
+  {"icon": Icons.shopping_cart, "title": "In-App Purchases"},
+  {"icon": Icons.campaign, "title": "Ads"},
+  {"icon": Icons.payment, "title": "Payment Gateways"},
+  {"icon": Icons.architecture, "title": "MVC/MVVM"},
+  {"icon": Icons.storage, "title": "Local Storage"},
+  {"icon": Icons.cloud_upload, "title": "GitHub CI/CD"},
+  {"icon": Icons.settings, "title": "State Management"},
+  {"icon": Icons.map, "title": "Google Maps"},
+  {"icon": Icons.send, "title": "Deployment"},
+  {"icon": Icons.description, "title": "Postman"},
+  {"icon": Icons.language, "title": "Multi-Language"},
+];
+
 class SkillCard extends StatelessWidget {
-  final String iconPath;
+  final IconData iconPath;
   final String title;
 
   const SkillCard({super.key, required this.iconPath, required this.title});
@@ -109,8 +125,6 @@ class SkillCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // width: 184,
-      // height: (MediaQuery.of(context).size.width * 0.084).clamp(30, 84),
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -127,15 +141,11 @@ class SkillCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SvgPicture.asset(
-            iconPath,
-            width: 20,
-            height: 20,
-            color: AppColors.blackColor,
-          ),
+          Icon(iconPath, size: 20, color: AppColors.primaryColor),
           const SizedBox(height: 10),
           TextViewWidget(
             title,
+            isEllipsis: true,
             fontSize: 14,
             fontWeight: FontWeight.bold,
             color: AppColors.blackColor,

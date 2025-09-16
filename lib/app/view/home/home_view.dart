@@ -120,7 +120,7 @@ class _HomeViewState extends State<HomeView> {
               child: const ContactSectionWidget(key: Key("contact")),
             ),
             const SizedBox(height: 80),
-            Container(key: contactKey,child: const FooterSectionWidget()),
+            Container(key: contactKey, child: const FooterSectionWidget()),
           ],
         ),
       ),

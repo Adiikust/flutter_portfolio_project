@@ -58,6 +58,7 @@ class IntroSectionWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: AppColors.primaryColor,
                     borderRadius: BorderRadius.circular(20),
+                    image: DecorationImage(image: NetworkImage("https://avatars.githubusercontent.com/u/99065355?v=4"))
                   ),
                   // TODO: Replace with Image.asset("assets/profile.png") if needed
                 ),
@@ -81,6 +82,8 @@ class IntroSectionWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 color: AppColors.primaryColor,
                 borderRadius: BorderRadius.circular(20),
+                  image: DecorationImage(image: NetworkImage("https://avatars.githubusercontent.com/u/99065355?v=4"))
+
               ),
               // TODO: Replace with Image.asset("assets/profile.png") if needed
             ),
