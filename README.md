@@ -3,6 +3,8 @@
 A responsive **portfolio website** designed for a **Senior Flutter Developer**, optimized for **tablet devices**.  
 The design focuses on **professional presentation, recruiter-friendliness, and modern UI principles**.
 
+🌍 **Live Hosting URL**: [https://portfolioproject-813b0.web.app](https://portfolioproject-813b0.web.app)
+
 ---
 
 ## 🔹 Features
@@ -84,10 +86,28 @@ The design focuses on **professional presentation, recruiter-friendliness, and m
 
 ---
 
+# Build web app
+flutter build web
+
+# Install Firebase CLI
+npm install -g firebase-tools
+
+# Login to Firebase
+firebase login
+
+# Configure Firebase Hosting
+firebase init hosting
+
+# Configure Firebase SDK in Flutter
+flutterfire configure
+
+# Deploy to Firebase Hosting
+firebase deploy
+
 ## 🚀 Getting Started
 
 Clone this repository:
-
 ```bash
 git clone https://github.com/Adiikust/flutter_portfolio_project.git
+cd flutter_portfolio_project
 
